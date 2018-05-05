@@ -1,0 +1,965 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.2.0" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.2.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.2.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '6.2.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="[TOC] 1. 安装系统基础软件本文针对的是在一个全新的Ubuntu18.04操作系统上安装Vim，所以需要先安装一些系统需要的最基础的软件。">
+<meta name="keywords" content="开发工具,Vim">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Vim配置过程记录（Ubuntu 18.04 LTS）">
+<meta property="og:url" content="https://widgrs.github.io/2018/04/29/Vim配置过程记录（Ubuntu_18.04_LTS）/index.html">
+<meta property="og:site_name" content="Widgrs&#39;s Blog">
+<meta property="og:description" content="[TOC] 1. 安装系统基础软件本文针对的是在一个全新的Ubuntu18.04操作系统上安装Vim，所以需要先安装一些系统需要的最基础的软件。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-05-05T12:32:00.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Vim配置过程记录（Ubuntu 18.04 LTS）">
+<meta name="twitter:description" content="[TOC] 1. 安装系统基础软件本文针对的是在一个全新的Ubuntu18.04操作系统上安装Vim，所以需要先安装一些系统需要的最基础的软件。">
+
+
+
+
+
+
+  <link rel="canonical" href="https://widgrs.github.io/2018/04/29/Vim配置过程记录（Ubuntu_18.04_LTS）/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Vim配置过程记录（Ubuntu 18.04 LTS） | Widgrs's Blog</title>
+  
+
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?f5db1246eddd38850de4b743cab7ab59";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Widgrs's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">每一个不曾起舞的日子都是对生命的辜负！</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br />关于</a>
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://widgrs.github.io/2018/04/29/Vim配置过程记录（Ubuntu_18.04_LTS）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Widgrs">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Widgrs's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Vim配置过程记录（Ubuntu 18.04 LTS）
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-04-29 18:54:00" itemprop="dateCreated datePublished" datetime="2018-04-29T18:54:00+08:00">2018-04-29</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-05-05 20:32:00" itemprop="dateModified" datetime="2018-05-05T20:32:00+08:00">2018-05-05</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/开发工具/" itemprop="url" rel="index"><span itemprop="name">开发工具</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/开发工具/Vim/" itemprop="url" rel="index"><span itemprop="name">Vim</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2018/04/29/Vim配置过程记录（Ubuntu_18.04_LTS）/#SOHUCS" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2018/04/29/Vim配置过程记录（Ubuntu_18.04_LTS）/" itemprop="commentsCount"></span>
+                </a>
+              
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>[TOC]</p>
+<h1 id="1-安装系统基础软件"><a href="#1-安装系统基础软件" class="headerlink" title="1. 安装系统基础软件"></a>1. 安装系统基础软件</h1><p>本文针对的是在一个全新的Ubuntu18.04操作系统上安装Vim，所以需要先安装一些系统需要的最基础的软件。</p>
+<a id="more"></a>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">sudo apt update</span><br><span class="line">sudo apt install openssh-server</span><br><span class="line">sudo apt install git</span><br><span class="line"><span class="meta">#</span> 配置Git</span><br><span class="line">git config --global user.name "Widgrs"</span><br><span class="line">git config --global user.email "jichliu@163.com"</span><br><span class="line"><span class="meta">#</span> 查看Git全局设置</span><br><span class="line">git config --global -l</span><br><span class="line"><span class="meta">#</span> 查看是否有SSH Keys</span><br><span class="line">ls -al ~/.ssh</span><br><span class="line"><span class="meta">#</span> 如果没有id_rsa文件，则生成一对密钥对</span><br><span class="line"><span class="meta">#</span> 如果自己有常用的密钥对，则可以略过下一步，直接将私钥拷贝到~/.ssh目录下再更改文件权限即可</span><br><span class="line">ssh-keygen -t rsa -b 4096 -C "Widgrs's Key"</span><br><span class="line"><span class="meta">#</span> 更改id_rsa文件权限，如果提示权限太高则将权限改为600</span><br><span class="line">chmod 644 id_rsa</span><br><span class="line"><span class="meta">#</span> 将id_rsa.pub文件中的内容复制到GitHub SSH Keys设置中</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 测试是否能成功连接到GitHub</span><br><span class="line">ssh -T git@github.com</span><br><span class="line"><span class="meta">#</span> 如果成功，返回结果为：</span><br><span class="line"><span class="meta">#</span> Hi Widgrs! You've successfully authenticated, but GitHub does not provide shell access.</span><br><span class="line"><span class="meta">#</span> 如果提示Failed to add the host to the list of known hosts (/home/ubuntu/.ssh/known_hosts)</span><br><span class="line"><span class="meta">#</span> 则在.ssh目录下新建一个known_hosts文件并将其权限更改为766</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 安装几个基础软件</span><br><span class="line">sudo apt install lrzsz tree cmake checkinstall dos2unix curl python-pip</span><br></pre></td></tr></table></figure>
+<h1 id="2-源码安装Vim"><a href="#2-源码安装Vim" class="headerlink" title="2. 源码安装Vim"></a>2. 源码安装Vim</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> 安装Vim相关依赖库的头文件，如果不需要python3、ruby、perl、gtk等也可以不安装</span><br><span class="line">sudo apt install python-dev python3-dev ruby-dev liblua5.3-dev libperl-dev libncurses5-dev libx11-dev libgnome2-dev libgnomeui-dev libxt-dev libgtk2.0-dev</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 下载最新版本的Vim源码</span><br><span class="line">git clone git@github.com:vim/vim.git ~/Download/Vim</span><br><span class="line"><span class="meta">#</span> 卸载系统自带的老版本Vim（如果有的话）</span><br><span class="line">sudo apt remove vim vim-runtime gvim</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 编译Vim源代码并安装</span><br><span class="line">cd ~/Download/Vim/</span><br><span class="line"><span class="meta">#</span> Python3的头文件目录 /usr/lib/python3.6/config-3.6m-x86_64-linux-gnu 需要根据实际进行修改</span><br><span class="line">./configure --with-features=huge --enable-multibyte --enable-python3interp --enable-rubyinterp --enable-luainterp --enable-perlinterp --with-python3-config-dir=/usr/lib/python3.6/config-3.6m-x86_64-linux-gnu/ --enable-gui=gnome2 --enable-cscope --prefix=/usr/local</span><br><span class="line">make</span><br><span class="line"><span class="meta">#</span> 使用root权限安装，否则会提示“无法创建普通文件'/usr/local/bin/vim': 权限不够”</span><br><span class="line"><span class="meta">#</span> 使用checkinstall打包安装方便卸载，卸载使用命令sudo dpkg -r packagename</span><br><span class="line">sudo checkinstall</span><br></pre></td></tr></table></figure>
+<p>安装完成后在Vim中执行<code>:echo has(&#39;python3&#39;)</code> ，若输出 1 则表示构建出的 Vim 已支持 python3，反之输出 0 则表示不支持。</p>
+<h1 id="3-安装LLVM-Clang和Go开发环境"><a href="#3-安装LLVM-Clang和Go开发环境" class="headerlink" title="3. 安装LLVM + Clang和Go开发环境"></a>3. 安装LLVM + Clang和Go开发环境</h1><h2 id="3-1-安装LLVM-Clang"><a href="#3-1-安装LLVM-Clang" class="headerlink" title="3.1 安装LLVM + Clang"></a>3.1 安装LLVM + Clang</h2><p>Ubuntu 18.04官方源中Clang的默认版本是6.0，已经是最新版本了（2018年4月29日），所以直接使用APT安装即可。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install llvm clang libc++-dev libc++abi-dev</span><br></pre></td></tr></table></figure>
+<p>创建一个验证文件test.cc，输入以下内容（注意最后要多留一行空行），然后执行编译命令 <code>clang++ -std=c++11 -stdlib=libc++ -Werror -Weverything -Wno-disabled-macro-expansion -Wno-float-equal -Wno-c++98-compat -Wno-c++98-compat-pedantic -Wno-global-constructors -Wno-exit-time-destructors -Wno-missing-prototypes -Wno-padded -Wno-old-style-cast -lc++ -lc++abi test.cc</code> 并运行生成的可执行文件，看是否输出正确结果。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyClass</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">string</span> s =<span class="string">"Hello, world\n"</span>; <span class="comment">// Non-static data member initializer</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; MyClass().s;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="3-2-安装Golang"><a href="#3-2-安装Golang" class="headerlink" title="3.2 安装Golang"></a>3.2 安装Golang</h2><p>Ubuntu 18.04官方源中Golang的默认版本是1.10，也已经是最新版本了（2018年4月29日），所以直接使用APT安装即可。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install golang-go</span><br></pre></td></tr></table></figure>
+<p>创建一个验证文件test.go并输入以下内容，然后运行go run test.go查看是否输出正确结果。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    fmt.Println(<span class="string">"Hello World!"</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>由于是使用APT安装，可执行程序go在/usr/bin目录下，所以不需要再设置GOROOT，只需要设置GOPATH：在~/.bashrc文件中添加如下两行，并执行source ~/.bashrc使其生效。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> $HOME/Code/Golang目录即为Go的代码目录，可以根据实际情况修改。按照约定，其下有src、bin、pkg三个目录，src用于存放源代码，bin用于存放编译生成的可执行文件，pkg用于存放编译生成的中间文件</span><br><span class="line"><span class="meta">#</span> 执行 go build project_name 即可编译项目</span><br><span class="line"><span class="meta">#</span> 执行 go install project_name 即可编译项目并将生成的可执行文件拷贝到 bin 目录下</span><br><span class="line"><span class="meta">#</span> 将 $GOPATH/bin 目录也添加进系统路径，这样就可以直接执行go生成的可执行文件</span><br><span class="line">export GOPATH=$HOME/Code/Golang</span><br><span class="line">export PATH=$PATH:$GOPATH/bin</span><br></pre></td></tr></table></figure>
+<h1 id="4-安装插件"><a href="#4-安装插件" class="headerlink" title="4. 安装插件"></a>4. 安装插件</h1><h2 id="4-1-基础设置"><a href="#4-1-基础设置" class="headerlink" title="4.1 基础设置"></a>4.1 基础设置</h2><p>参见备份的<code>.vimrc</code>文件</p>
+<h2 id="4-2-安装vim-plug插件"><a href="#4-2-安装vim-plug插件" class="headerlink" title="4.2 安装vim-plug插件"></a>4.2 安装vim-plug插件</h2><p>下载 <a href="https://github.com/junegunn/vim-plug" target="_blank" rel="noopener">vim-plug</a> 插件到 ~/.vim/autoload 目录：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">curl -fLo ~/.vim/autoload/plug.vim --create-dirs \</span><br><span class="line">    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim</span><br></pre></td></tr></table></figure>
+<p>在 .vimrc 文件中添加 call plug#begin() 和 call plug#end() 段并在其中添加插件信息，然后打开Vim运行<code>:PlugInstall</code>命令安装插件。插件会被默认下载到<code>~/.vim/plugged</code>目录，也可以自己制定目录。</p>
+<h2 id="4-3-安装vim-gutentags插件"><a href="#4-3-安装vim-gutentags插件" class="headerlink" title="4.3 安装vim-gutentags插件"></a>4.3 安装vim-gutentags插件</h2><p>由于ctags已经多年不维护了，所以使用其替代品<a href="https://ctags.io/" target="_blank" rel="noopener">Universal Ctags</a>，因为仓库里没有该软件，所以使用源码安装：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">git clone git@github.com:universal-ctags/ctags.git ~/Download/ctags</span><br><span class="line">cd ~/Download/ctags</span><br><span class="line"><span class="meta">#</span> 如果提示 autoreconf: not found 需要安装 autoconf</span><br><span class="line"><span class="meta">#</span> sudo apt-get install autoconf</span><br><span class="line">./autogen.sh</span><br><span class="line"><span class="meta">#</span> 为了避免ctags名称冲突，安装时将其名称设为exctags</span><br><span class="line">./configure --program-prefix=ex --prefix=/usr/local</span><br><span class="line">make</span><br><span class="line"><span class="meta">#</span> 使用 sudo dpkg -r exctags 卸载</span><br><span class="line">sudo checkinstall</span><br></pre></td></tr></table></figure>
+<p><a href="https://github.com/ludovicchabant/vim-gutentags" target="_blank" rel="noopener">vim-gutentags</a> 是一个异步自动生成tags的插件，需要在后端调用ctags软件，其可以从文件当前路径向上递归查找是否有 <code>.git</code>, <code>.svn</code>, <code>.project</code> 等标志性文件（可以自定义）来确定当前文档所属的工程目录，并可以增量更新工程对应的tags文件。</p>
+<h2 id="4-4-安装YouCompleteMe插件"><a href="#4-4-安装YouCompleteMe插件" class="headerlink" title="4.4 安装YouCompleteMe插件"></a>4.4 安装YouCompleteMe插件</h2><p><a href="https://github.com/Valloric/YouCompleteMe" target="_blank" rel="noopener">YouCompleteMe</a> 是一个功能强大的补全插件，安装过程如下：</p>
+<p>编译YouCompleteMe共享库：从LLVM官网下载合适版本的预编译二进制文件到Download目录并解压或者使用APT方式安装LLVM + Clang（第二步中已完成），然后执行如下操作后会在 ~/.vim/bundle/YouCompleteMe/third_party/ycmd 中生成 libclang.so.6、libclang.so.6.0、ycm_core.so、PYTHON_USED_DURING_BUILDING等文件。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> 单独手动安装C/C++补全</span><br><span class="line"><span class="meta">#</span> 如果不安装boost库文件则会报错</span><br><span class="line">sudo apt install libboost-all-dev</span><br><span class="line">cd ~/Download</span><br><span class="line">mkdir ycm_build</span><br><span class="line">cd ycm_build</span><br><span class="line"><span class="meta">#</span> clang+llvm-5.0.1-x86_64-linux-gnu-ubuntu-16.04目录根据实际情况修改</span><br><span class="line">cmake -G "Unix Makefiles" -DUSE_SYSTEM_BOOST=ON -DPATH_TO_LLVM_ROOT=~/Download/clang+llvm-5.0.1-x86_64-linux-gnu-ubuntu-16.04 . ~/.vim/plugged/YouCompleteMe/third_party/ycmd/cpp</span><br><span class="line">cmake --build . --target ycm_core</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 自动安装C/C++补全和Golang补全(已配置好Golang环境)</span><br><span class="line">cd ~/.vim/plugged/YouCompleteMe</span><br><span class="line">./install.py --clang-completer --system-libclang --go-completer</span><br></pre></td></tr></table></figure>
+<p>YouCompleteMe会在当前路径以及上层路径寻找.ycm_extra_conf.py，也可以在.vimrc文件中指定.ycm_extra_conf.py的路径。将备份的.ycm_extra_conf.py文件放置于~/.vim/plugged/YouCompleteMe/third_party/config/目录下并修改.vimrc配置文件即可。</p>
+<h2 id="4-5-安装vim-go插件"><a href="#4-5-安装vim-go插件" class="headerlink" title="4.5 安装vim-go插件"></a>4.5 安装vim-go插件</h2><p><a href="https://github.com/fatih/vim-go" target="_blank" rel="noopener">vim-go</a> 插件是一个用于支持Go语言开发的插件，首先在 .vimrc 文件中 增加一行 <code>Plug &#39;fatih/vim-go&#39;</code>然后打开Vim执行<code>:PlugInstall</code>命令安装 vim-go 插件，然后执行<code>:GoInstallBinaries</code>命令自动安装相关的工具到<code>$GOPATH/bin</code>目录下。</p>
+<p>注意：由于墙的原因，有些工具会下载失败，可以在 ~/.vim/plugged/vim-go/plugin/go.vim 文件的 s:packages 字段中找到需要从 golang.org 网站下载的包名，自己去 <a href="https://www.golangtc.com/download/package" target="_blank" rel="noopener">Golang中国</a> 网站下载，将下载的文件解压缩到<code>$GOPATH/src</code>目录下，然后执行如下命令安装：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">go install golang.org/x/tools/cmd/goimports</span><br><span class="line">go install golang.org/x/tools/cmd/gorename</span><br><span class="line">go install golang.org/x/tools/cmd/godoc</span><br><span class="line">go install golang.org/x/tools/cmd/guru</span><br><span class="line">。。。等</span><br></pre></td></tr></table></figure>
+<h1 id="5-从备份文件安装"><a href="#5-从备份文件安装" class="headerlink" title="5. 从备份文件安装"></a>5. 从备份文件安装</h1><p>从备份文件安装首先按照步骤1、2、3安装相关软件，然后将备份文件解压至当前用户的主目录，并编译安装Universal Ctags（步骤4.3）、YouCompleteMe（步骤4.4）和GO相关工具（步骤4.5）即可。</p>
+<h1 id="6-参考资料"><a href="#6-参考资料" class="headerlink" title="6. 参考资料"></a>6. 参考资料</h1><ul>
+<li><a href="https://github.com/Valloric/YouCompleteMe/wiki/Building-Vim-from-source" target="_blank" rel="noopener">Building Vim from source</a></li>
+<li><a href="https://github.com/yangyangwithgnu/use_vim_as_ide" target="_blank" rel="noopener">所需即所获：像 IDE 一样使用 vim</a></li>
+<li><a href="https://www.zhihu.com/question/47691414" target="_blank" rel="noopener">如何在 Linux 下利用 Vim 搭建 C/C++ 开发环境?</a></li>
+<li><a href="http://www.skywind.me/blog/archives/2084" target="_blank" rel="noopener">Vim 8 下 C/C++ 开发环境搭建</a></li>
+</ul>
+<ul>
+<li><a href="http://releases.llvm.org/download.html" target="_blank" rel="noopener">LLVM Download Page</a></li>
+<li><a href="https://github.com/Valloric/ycmd" target="_blank" rel="noopener">Valloric/ycmd</a></li>
+<li><a href="https://www.jianshu.com/p/d908ce81017a?nomobile=yes" target="_blank" rel="noopener">一步一步带你安装史上最难安装的 vim 插件 —— YouCompleteMe</a></li>
+<li><a href="http://www.cnblogs.com/Harley-Quinn/p/6418070.html" target="_blank" rel="noopener">Ubuntu 16.04 64位安装YouCompleteMe</a></li>
+<li><a href="https://golang.google.cn/" target="_blank" rel="noopener">The Go Programming Language</a></li>
+</ul>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/uploads/wechatpay.jpg" alt="Widgrs 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/uploads/alipay.jpg" alt="Widgrs 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/开发工具/" rel="tag"># 开发工具</a>
+          
+            <a href="/tags/Vim/" rel="tag"># Vim</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/02/20/像IDE一样使用Vim（Ubuntu_16.04_LTS）/" rel="next" title="像IDE一样使用Vim（Ubuntu 16.04 LTS）">
+                <i class="fa fa-chevron-left"></i> 像IDE一样使用Vim（Ubuntu 16.04 LTS）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/05/05/使用Hexo+GitHub_Pages搭建个人博客/" rel="prev" title="使用Hexo+GitHub Pages搭建个人博客">
+                使用Hexo+GitHub Pages搭建个人博客 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="SOHUCS"></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/uploads/avatar.jpg"
+                alt="Widgrs" />
+            
+              <p class="site-author-name" itemprop="name">Widgrs</p>
+              <p class="site-description motion-element" itemprop="description">默默滴躲在墙角写Bug的代码狗！</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">3</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">3</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">4</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/Widgrs" target="_blank" title="GitHub"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:jichliu@163.com" target="_blank" title="E-Mail"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-安装系统基础软件"><span class="nav-text">1. 安装系统基础软件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-源码安装Vim"><span class="nav-text">2. 源码安装Vim</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-安装LLVM-Clang和Go开发环境"><span class="nav-text">3. 安装LLVM + Clang和Go开发环境</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-安装LLVM-Clang"><span class="nav-text">3.1 安装LLVM + Clang</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-安装Golang"><span class="nav-text">3.2 安装Golang</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-安装插件"><span class="nav-text">4. 安装插件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#4-1-基础设置"><span class="nav-text">4.1 基础设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-2-安装vim-plug插件"><span class="nav-text">4.2 安装vim-plug插件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-3-安装vim-gutentags插件"><span class="nav-text">4.3 安装vim-gutentags插件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-4-安装YouCompleteMe插件"><span class="nav-text">4.4 安装YouCompleteMe插件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-5-安装vim-go插件"><span class="nav-text">4.5 安装vim-go插件</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-从备份文件安装"><span class="nav-text">5. 从备份文件安装</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6-参考资料"><span class="nav-text">6. 参考资料</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Widgrs</span>
+
+  
+
+  
+</div>
+
+
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/theme-next/hexo-theme-next">NexT.Pisces</a></div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.2.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.2.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.2.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.2.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.2.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.2.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.2.0"></script>
+
+
+
+  
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+  
+    <script type="text/javascript">
+    (function(){
+      var appid = 'cysUSmxFX';
+      var conf = 'aa50a0c8801c7ea0e758f32e9c100ebb';
+      var width = window.innerWidth || document.documentElement.clientWidth;
+      if (width < 960) {
+      window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){
+        window.changyan.api.config({appid:appid,conf:conf})});
+      }
+    })();
+    </script>
+    <script type="text/javascript" src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
+  
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
